@@ -1,6 +1,7 @@
 package application.usecases;
 
 import domain.model.Match;
+import domain.model.MatchRanking;
 import infrastructure.InMemoryRepository;
 
 import java.util.List;
@@ -16,7 +17,7 @@ public class GetScoreBoardUseCase {
   }
 
   public ScoreBoardResponse execute() {
-    var matches = memoryRepository.findAll();
+    var matches = memoryRepository.findAll().stream().sorted(MatchRanking.BY_TOTAL_GOALS).toList();
     return new ScoreBoardResponse(matches);
   }
 

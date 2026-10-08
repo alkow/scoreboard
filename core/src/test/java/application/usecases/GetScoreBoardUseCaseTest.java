@@ -23,4 +23,26 @@ class GetScoreBoardUseCaseTest {
     );
     assertEquals(expected, response);
   }
+
+  @Test
+  void shouldSortByTotalGoalsInMatch() {
+    var sixGoals = Match.ofNew("Norway", "Brazil").updateScore(3, 3);
+    var fiveGoals = Match.ofNew("England", "Germany").updateScore(3, 2);
+    var twoGoals = Match.ofNew("Spain", "Italy").updateScore(1, 1);
+
+    var matchRepository = new InMemoryRepository() {
+      @Override
+      public List<Match> findAll() {
+        return List.of(fiveGoals, twoGoals, sixGoals);
+      }
+    };
+    var useCase = new GetScoreBoardUseCase(matchRepository);
+
+    var response = useCase.execute();
+
+    var expected = new GetScoreBoardUseCase.ScoreBoardResponse(
+      List.of(sixGoals, fiveGoals, twoGoals)
+    );
+    assertEquals(expected, response);
+  }
 }
