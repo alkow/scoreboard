@@ -20,7 +20,7 @@ public class GetScoreBoardUseCase {
     var matches = memoryRepository.findAll()
       .stream()
       .filter(Match::isNotFinished)
-      .sorted(MatchRanking.BY_TOTAL_GOALS)
+      .sorted(MatchRanking.BY_TOTAL_GOALS_THEN_NEWEST)
       .toList();
     return new ScoreBoardResponse(matches);
   }

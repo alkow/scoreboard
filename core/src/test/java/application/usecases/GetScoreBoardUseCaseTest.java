@@ -1,6 +1,7 @@
 package application.usecases;
 
 import domain.model.Match;
+import domain.model.Team;
 import infrastructure.InMemoryRepository;
 import org.junit.jupiter.api.Test;
 
@@ -45,6 +46,33 @@ class GetScoreBoardUseCaseTest {
       List.of(sixGoals, fiveGoals, twoGoals)
     );
     assertEquals(expected, response);
+  }
+
+  @Test
+  void shouldSortByTimeStartedWhenEqualTotalScore() {
+    var older = new Match(
+      "1", new Team("Norway", 0), new Team("Brazil", 0),
+      1000L, null
+    );
+    var newer = new Match(
+      "2", new Team("England", 0), new Team("Germany", 0),
+      2000L, null
+    );
+
+    var repository = new InMemoryRepository() {
+      @Override
+      public List<Match> findAll() {
+        return List.of(older, newer);
+      }
+    };
+
+    var useCase = new GetScoreBoardUseCase(repository);
+
+    var expected = new GetScoreBoardUseCase.ScoreBoardResponse(
+      List.of(newer, older)
+    );
+
+    assertEquals(expected, useCase.execute());
   }
 
   @Test
