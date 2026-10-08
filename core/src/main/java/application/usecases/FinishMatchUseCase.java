@@ -1,12 +1,12 @@
 package application.usecases;
 
-import infrastructure.InMemoryRepository;
+import application.ports.MatchRepository;
 
 public class FinishMatchUseCase {
 
-  private final InMemoryRepository matchRepository;
+  private final MatchRepository matchRepository;
 
-  public FinishMatchUseCase(InMemoryRepository matchRepository) {
+  public FinishMatchUseCase(MatchRepository matchRepository) {
     this.matchRepository = matchRepository;
   }
 

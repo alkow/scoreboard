@@ -1,11 +1,11 @@
 package application.usecases;
 
-import infrastructure.InMemoryRepository;
+import application.ports.MatchRepository;
 
 public class UpdateScoreUseCase {
-  private final InMemoryRepository matchRepository;
+  private final MatchRepository matchRepository;
 
-  public UpdateScoreUseCase(InMemoryRepository matchRepository) {
+  public UpdateScoreUseCase(MatchRepository matchRepository) {
     this.matchRepository = matchRepository;
   }
 
@@ -21,5 +21,6 @@ public class UpdateScoreUseCase {
     String matchId,
     int homeScore,
     int awayScore
-  ) {}
+  ) {
+  }
 }

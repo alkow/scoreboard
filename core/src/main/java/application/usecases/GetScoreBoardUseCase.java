@@ -1,17 +1,17 @@
 package application.usecases;
 
+import application.ports.MatchRepository;
 import domain.model.Match;
 import domain.model.MatchRanking;
-import infrastructure.InMemoryRepository;
 
 import java.util.List;
 
 public class GetScoreBoardUseCase {
 
-  private final InMemoryRepository memoryRepository;
+  private final MatchRepository memoryRepository;
 
   public GetScoreBoardUseCase(
-    InMemoryRepository memoryRepository
+    MatchRepository memoryRepository
   ) {
     this.memoryRepository = memoryRepository;
   }

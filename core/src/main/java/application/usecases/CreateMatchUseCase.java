@@ -1,11 +1,11 @@
 package application.usecases;
 
+import application.ports.MatchRepository;
 import domain.model.Match;
-import infrastructure.InMemoryRepository;
 
 public class CreateMatchUseCase {
-  private final InMemoryRepository matchRepository;
-  public CreateMatchUseCase(InMemoryRepository matchRepository) {
+  private final MatchRepository matchRepository;
+  public CreateMatchUseCase(MatchRepository matchRepository) {
     this.matchRepository = matchRepository;
   }
 
