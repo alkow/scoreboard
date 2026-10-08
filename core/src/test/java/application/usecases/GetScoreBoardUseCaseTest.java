@@ -4,6 +4,7 @@ import domain.model.Match;
 import infrastructure.InMemoryRepository;
 import org.junit.jupiter.api.Test;
 
+import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -42,6 +43,21 @@ class GetScoreBoardUseCaseTest {
 
     var expected = new GetScoreBoardUseCase.ScoreBoardResponse(
       List.of(sixGoals, fiveGoals, twoGoals)
+    );
+    assertEquals(expected, response);
+  }
+
+  @Test
+  void shouldExcludeFinishedMatches() {
+    var match = Match.ofNew("Norway", "Brazil").finish();
+    var matchRepository = new InMemoryRepository();
+    matchRepository.save(match);
+    var useCase = new GetScoreBoardUseCase(matchRepository);
+
+    var response = useCase.execute();
+
+    var expected = new GetScoreBoardUseCase.ScoreBoardResponse(
+      Collections.emptyList()
     );
     assertEquals(expected, response);
   }

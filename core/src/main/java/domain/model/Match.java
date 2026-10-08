@@ -13,6 +13,10 @@ public record Match(
     return endTimeStamp != null;
   }
 
+  public boolean isNotFinished() {
+    return endTimeStamp == null;
+  }
+
   public boolean isStarted() {
     return startTimeStamp() > 0;
   }

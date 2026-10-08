@@ -17,7 +17,11 @@ public class GetScoreBoardUseCase {
   }
 
   public ScoreBoardResponse execute() {
-    var matches = memoryRepository.findAll().stream().sorted(MatchRanking.BY_TOTAL_GOALS).toList();
+    var matches = memoryRepository.findAll()
+      .stream()
+      .filter(Match::isNotFinished)
+      .sorted(MatchRanking.BY_TOTAL_GOALS)
+      .toList();
     return new ScoreBoardResponse(matches);
   }
 
