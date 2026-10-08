@@ -46,8 +46,8 @@ public record Match(
   public static Match ofNew(String homeTeam, String awayTeam) {
     return new Match(
       UUID.randomUUID().toString(),
-      new Team(homeTeam, 0),
-      new Team(awayTeam, 0),
+      Team.ofNew(homeTeam),
+      Team.ofNew(awayTeam),
       System.currentTimeMillis(),
       null
     );
