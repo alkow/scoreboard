@@ -1,16 +1,15 @@
 package application.usecases;
 
 import domain.model.Match;
-import domain.model.Team;
 import infrastructure.InMemoryRepository;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class FinishMatchUseCaseTest {
   @Test
   void shouldFinishMatch() {
-    var match = new Match("1", new Team("Norway", 0), new Team("Brazil", 0), System.currentTimeMillis(), null);
+    var match = Match.ofNew("Brazil", "Norway");
     var matchRepository = new InMemoryRepository();
     matchRepository.save(match);
     var useCase = new FinishMatchUseCase(matchRepository);

@@ -5,7 +5,7 @@ import domain.model.Team;
 import infrastructure.InMemoryRepository;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class CreateMatchUseCaseTest {
 
@@ -18,7 +18,10 @@ class CreateMatchUseCaseTest {
     var response = useCase.execute(command);
 
     var actual = matchRepository.findById(response.matchId());
-    var expected = new Match(response.matchId(), new Team(command.homeTeam(), 0), new Team(command.awayTeam(), 0), System.currentTimeMillis(), null);
-    assertEquals(expected, actual);
+    assertEquals(response.matchId(), actual.id(), "should have same id");
+    assertEquals(new Team(command.homeTeam(), 0), actual.home(), "should have home score of 0");
+    assertEquals(new Team(command.awayTeam(), 0), actual.away(), "should have away score of 0");
+    assertFalse(actual.isFinished(), "should not be finished");
+    assertTrue(actual.isStarted(), "should be started");
   }
 }
