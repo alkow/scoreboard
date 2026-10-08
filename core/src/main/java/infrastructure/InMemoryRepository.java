@@ -24,4 +24,8 @@ public class InMemoryRepository {
   public void finishMatch(String id) {
     save(findById(id).finish());
   }
+
+  public void updateScore(String matchId, int homeScore, int awayScore) {
+    save(findById(matchId).updateScore(homeScore, awayScore));
+  }
 }

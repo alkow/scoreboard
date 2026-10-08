@@ -27,6 +27,16 @@ public record Match(
     );
   }
 
+  public Match updateScore(int homeScore, int awayScore) {
+    return new Match(
+      id,
+      new Team(home.id(), homeScore),
+      new Team(away.id(), awayScore),
+      startTimeStamp,
+      endTimeStamp
+    );
+  }
+
   public static Match ofNew(String homeTeam, String awayTeam) {
     return new Match(
       UUID.randomUUID().toString(),
