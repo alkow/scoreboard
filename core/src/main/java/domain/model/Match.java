@@ -18,6 +18,9 @@ public record Match(
   }
 
   public Match finish() {
+    if (isFinished()) {
+      throw new IllegalStateException("Cannot finish an already finished match");
+    }
     return new Match(
       id,
       home,
@@ -28,6 +31,9 @@ public record Match(
   }
 
   public Match updateScore(int homeScore, int awayScore) {
+    if (isFinished()) {
+      throw new IllegalStateException("Cannot update finished match");
+    }
     return new Match(
       id,
       new Team(home.id(), homeScore),
