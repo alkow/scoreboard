@@ -2,6 +2,7 @@ package infrastructure;
 
 import domain.model.Match;
 
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -14,5 +15,9 @@ public class InMemoryRepository {
 
   public void save(Match match) {
     store.put(match.id(), match);
+  }
+
+  public List<Match> findAll() {
+    return List.copyOf(store.values());
   }
 }
