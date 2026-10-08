@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class GetScoreBoardUseCaseTest {
   @Test
   void shouldGetScoreBoard() {
-    var match = new Match("", new Team("Norway", 0), new Team("Brazil", 0));
+    var match = new Match("", new Team("Norway", 0), new Team("Brazil", 0), System.currentTimeMillis(), null);
     var matchRepository = new InMemoryRepository();
     matchRepository.save(match);
     var useCase = new GetScoreBoardUseCase(matchRepository);

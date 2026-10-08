@@ -14,7 +14,7 @@ public class CreateMatchUseCase {
 
   public CreateMatchResponse execute(CreateMatchCommand command) {
     String matchId = UUID.randomUUID().toString();
-    matchRepository.save(new Match(matchId, new Team(command.homeTeam, 0), new Team(command.awayTeam, 0)));
+    matchRepository.save(new Match(matchId, new Team(command.homeTeam, 0), new Team(command.awayTeam, 0), System.currentTimeMillis(), null));
     return new CreateMatchResponse(matchId);
   }
 

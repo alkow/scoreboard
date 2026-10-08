@@ -20,4 +20,8 @@ public class InMemoryRepository {
   public List<Match> findAll() {
     return List.copyOf(store.values());
   }
+
+  public void finishMatch(String id) {
+    save(findById(id).finish());
+  }
 }

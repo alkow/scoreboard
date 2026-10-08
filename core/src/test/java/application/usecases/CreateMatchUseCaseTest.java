@@ -18,7 +18,7 @@ class CreateMatchUseCaseTest {
     var response = useCase.execute(command);
 
     var actual = matchRepository.findById(response.matchId());
-    var expected = new Match(response.matchId(), new Team(command.homeTeam(), 0), new Team(command.awayTeam(), 0));
+    var expected = new Match(response.matchId(), new Team(command.homeTeam(), 0), new Team(command.awayTeam(), 0), System.currentTimeMillis(), null);
     assertEquals(expected, actual);
   }
 }
